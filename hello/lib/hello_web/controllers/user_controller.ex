@@ -1,21 +1,21 @@
 defmodule HelloWeb.UserController do
   use HelloWeb, :controller
 
-  alias Hello.Users
-  alias Hello.Users.User
+  alias Hello.Accounts
+  alias Hello.Accounts.User
 
   def index(conn, _params) do
-    users = Users.list_users()
+    users = Accounts.list_users()
     render(conn, "index.html", users: users)
   end
 
   def new(conn, _params) do
-    changeset = Users.change_user(%User{})
+    changeset = Accounts.change_user(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
-    case Users.create_user(user_params) do
+    case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
@@ -27,20 +27,20 @@ defmodule HelloWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
+    user = Accounts.get_user!(id)
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
-    changeset = Users.change_user(user)
+    user = Accounts.get_user!(id)
+    changeset = Accounts.change_user(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Users.get_user!(id)
+    user = Accounts.get_user!(id)
 
-    case Users.update_user(user, user_params) do
+    case Accounts.update_user(user, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
@@ -52,8 +52,8 @@ defmodule HelloWeb.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
-    {:ok, _user} = Users.delete_user(user)
+    user = Accounts.get_user!(id)
+    {:ok, _user} = Accounts.delete_user(user)
 
     conn
     |> put_flash(:info, "User deleted successfully.")

@@ -4,9 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
-      <th>Bio</th>
-      <th>Number of pets</th>
+      <th>Username</th>
 
       <th></th>
     </tr>
@@ -15,9 +13,7 @@
 <%= for user <- @users do %>
     <tr>
       <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.bio %></td>
-      <td><%= user.number_of_pets %></td>
+      <td><%= user.username %></td>
 
       <td>
         <span><%= link "Show", to: Routes.user_path(@conn, :show, user) %></span>

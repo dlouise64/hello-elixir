@@ -1,14 +1,14 @@
 defmodule HelloWeb.UserControllerTest do
   use HelloWeb.ConnCase
 
-  alias Hello.Users
+  alias Hello.Accounts
 
-  @create_attrs %{bio: "some bio", email: "some email", name: "some name", number_of_pets: 42}
-  @update_attrs %{bio: "some updated bio", email: "some updated email", name: "some updated name", number_of_pets: 43}
-  @invalid_attrs %{bio: nil, email: nil, name: nil, number_of_pets: nil}
+  @create_attrs %{name: "some name", username: "some username"}
+  @update_attrs %{name: "some updated name", username: "some updated username"}
+  @invalid_attrs %{name: nil, username: nil}
 
   def fixture(:user) do
-    {:ok, user} = Users.create_user(@create_attrs)
+    {:ok, user} = Accounts.create_user(@create_attrs)
     user
   end
 
@@ -60,7 +60,7 @@ defmodule HelloWeb.UserControllerTest do
       assert redirected_to(conn) == Routes.user_path(conn, :show, user)
 
       conn = get(conn, Routes.user_path(conn, :show, user))
-      assert html_response(conn, 200) =~ "some updated bio"
+      assert html_response(conn, 200) =~ "some updated name"
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
